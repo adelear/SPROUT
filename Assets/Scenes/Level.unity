@@ -375,17 +375,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca96b76e3cc35c45990c01304475139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBig: 0
+  isBig: 1
   isJumping: 0
-  currentWeight: 0
-  currentJumpStrength: 0
-  bigWeight: 10
+  currentWeight: 5
+  currentJumpStrength: 25
+  bigGrav: 2
+  lilGrav: 1
+  bigWeight: 5
   lilWeight: 1
-  bigJumpStrength: 10
-  lilJumpStrength: 5
+  bigJumpStrength: 25
+  lilJumpStrength: 7.5
   speed: 5
   hInput: 0
-  isGrounded: 0
+  isGrounded: 1
   groundCheck: {fileID: 1467137503}
   groundCheckRadius: 0.2
   groundLayer:
@@ -1000,14 +1002,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe25978948d547f47833e4b8e14ae4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downHeight: 5
+  downHeight: 2
   compressedHeight: 0.5
   launchHeight: 2
   compressionSpeed: 2
-  launchSpeed: 10
-  resetSpeed: 2
-  originalPosition: {x: 0, y: 0, z: 0}
-  downPosition: {x: 0, y: -5, z: 0}
+  launchSpeed: 5
+  resetSpeed: 5
+  launchImpulse: 5
 --- !u!1 &1804753571
 GameObject:
   m_ObjectHideFlags: 0

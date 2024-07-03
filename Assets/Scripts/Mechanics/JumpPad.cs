@@ -4,23 +4,29 @@ using UnityEngine;
 public class JumpPad : MonoBehaviour
 {
     [Header("Spring Properties")]
-    [SerializeField] float downHeight = 5f;
+    [SerializeField] float downHeight = 3f;
     [SerializeField] float compressedHeight = 0.5f;
-    [SerializeField] float launchHeight = 2f;
+    [SerializeField] float launchHeight = 4f;
     [SerializeField] float compressionSpeed = 2f;
     [SerializeField] float launchSpeed = 10f;
-    [SerializeField] float resetSpeed = 2f;
+    [SerializeField] float resetSpeed = 5f;
+    [SerializeField] float launchImpulse = 10f;
 
-    [SerializeField] private Vector3 originalPosition;
-    [SerializeField] private Vector3 downPosition;
+    private Vector3 originalPosition;
+    private Vector3 downPosition;
+
     private bool isPlayerOnPad;
     private bool isCompressed;
+    private bool isLaunching; 
+
     private PlayerController playerController;
 
     void Start()
     {
         originalPosition = transform.position;
         downPosition = new Vector3(originalPosition.x, originalPosition.y - downHeight, originalPosition.z);
+        isPlayerOnPad = false;
+        isCompressed = false; 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,11 +36,12 @@ public class JumpPad : MonoBehaviour
             playerController = collision.gameObject.GetComponent<PlayerController>();
             isPlayerOnPad = true;
 
-            // Check if the player is big and the trampoline is not already compressed
-            if (playerController.isBig && !isCompressed)
+
+            if (isCompressed && !playerController.isBig && isPlayerOnPad) // Ensure it only resets when not on the pad and compressed
             {
+                // Reset the spring when the player is no longer on the pad
                 StopAllCoroutines();
-                StartCoroutine(CompressSpring());
+                StartCoroutine(ResetSpring());
             }
         }
     }
@@ -43,29 +50,53 @@ public class JumpPad : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>())
         {
+            playerController = collision.gameObject.GetComponent<PlayerController>(); 
             isPlayerOnPad = false;
-
-            // Check if the trampoline is compressed and reset it
-            if (isCompressed)
+            /*
+            if (!isPlayerOnPad && isCompressed) // Ensure it only resets when not on the pad and compressed
             {
+                // Reset the spring when the player is no longer on the pad
                 StopAllCoroutines();
                 StartCoroutine(ResetSpring());
             }
+            */ 
         }
     }
 
     void Update()
     {
-        // Check if the player is on the pad, trampoline is compressed, player is small, and player is jumping
-        if (isPlayerOnPad && isCompressed && playerController != null && !playerController.isBig && playerController.IsJumping())
+        if (isPlayerOnPad) 
         {
-            StopAllCoroutines();
-            StartCoroutine(LaunchPlayer());
+            if (playerController.isBig && !isCompressed)
+            {
+                // Compress the spring
+                StopAllCoroutines();
+                StartCoroutine(CompressSpring());
+            }
+            else if (!playerController.isBig && isCompressed)
+            {
+                // Launch the player
+                StopAllCoroutines();
+                StartCoroutine(LaunchPlayer());
+            }
+        }
+
+        if (isLaunching)
+        {
+            if (playerController.IsJumping())
+            {
+                if (playerController.GetComponent<Rigidbody2D>() != null)
+                {
+                    Rigidbody2D rb = playerController.GetComponent<Rigidbody2D>();
+                    rb.AddForce(Vector2.up * launchImpulse, ForceMode2D.Impulse);
+                }
+            }
         }
     }
 
     IEnumerator CompressSpring()
     {
+        Debug.Log("Compressing"); 
         isCompressed = true;
         while (Vector3.Distance(transform.position, downPosition) > 0.01f)
         {
@@ -77,19 +108,25 @@ public class JumpPad : MonoBehaviour
 
     IEnumerator LaunchPlayer()
     {
+        Debug.Log("Launching");
+        isLaunching = true;
         Vector3 launchPosition = new Vector3(originalPosition.x, originalPosition.y + launchHeight, originalPosition.z);
         while (Vector3.Distance(transform.position, launchPosition) > 0.01f)
         {
-            transform.position = Vector3.Lerp(transform.position, launchPosition, Time.deltaTime * launchSpeed);
-            yield return null;
-        }
+            transform.position = Vector3.Lerp(transform.position, launchPosition, Time.deltaTime * launchSpeed); 
+            yield return null;  
+        } 
         transform.position = launchPosition;
-        yield return new WaitForSeconds(0.1f); // Wait a short duration to ensure the player is launched
-        StartCoroutine(ResetSpring());
+        isCompressed = false;
+        isLaunching = false;
+        yield return new WaitForSeconds(0.05f); // Wait a short duration to ensure the player is launched
+        StartCoroutine(ResetSpring()); 
     }
 
     IEnumerator ResetSpring()
     {
+        if (!isCompressed) yield return null; 
+        Debug.Log("Resetting"); 
         while (Vector3.Distance(transform.position, originalPosition) > 0.01f)
         {
             transform.position = Vector3.Lerp(transform.position, originalPosition, Time.deltaTime * resetSpeed);
@@ -97,5 +134,6 @@ public class JumpPad : MonoBehaviour
         }
         transform.position = originalPosition;
         isCompressed = false;
+        // I want it to reset and then not change position 
     }
 }

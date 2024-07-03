@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float currentJumpStrength; 
 
     [Header("Sizing Properties")]
+    [SerializeField] float bigGrav = 2f;
+    [SerializeField] float lilGrav = 1f;
     [SerializeField] float bigWeight = 100f;
     [SerializeField] float lilWeight = 10f;
     [SerializeField] float bigJumpStrength = 5f;
@@ -38,7 +40,8 @@ public class PlayerController : MonoBehaviour
         isBig = true;   
         currentWeight = bigWeight;
         currentJumpStrength = bigJumpStrength;
-        rb.mass = currentWeight; 
+        rb.mass = currentWeight;
+        rb.gravityScale = bigGrav; 
     }
 
     void Update()
@@ -67,12 +70,14 @@ public class PlayerController : MonoBehaviour
         if (isLarge)
         {
             currentWeight = bigWeight;
-            currentJumpStrength = bigJumpStrength; 
+            currentJumpStrength = bigJumpStrength;
+            rb.gravityScale = bigGrav;
         }
         else
         {
             currentWeight = lilWeight;
-            currentJumpStrength = lilJumpStrength; 
+            currentJumpStrength = lilJumpStrength;
+            rb.gravityScale = lilGrav;
         }
 
         rb.mass = currentWeight; 
