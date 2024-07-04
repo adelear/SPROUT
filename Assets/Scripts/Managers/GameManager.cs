@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject HealthImg;
     [SerializeField] AudioManager asm; 
     [SerializeField] AudioClip LossSound;
+    
     public static GameManager Instance { get; private set; }
     public enum GameState
     {
@@ -58,7 +59,7 @@ public class GameManager : MonoBehaviour
             if (lives < 0)
                 StartCoroutine(DelayedGameOver(0.5f)); 
 
-            DecreaseHealthBar(); 
+            DecreaseHealthBar();
 
             if (OnLifeValueChanged != null)
                 OnLifeValueChanged.Invoke(lives);

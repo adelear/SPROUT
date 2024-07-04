@@ -14,8 +14,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool isJumping;
     [SerializeField] public bool isWalkingOnWater;
     [SerializeField] public bool isInWater;
+    [SerializeField] public bool isDying; 
     [SerializeField] float currentWeight;
     [SerializeField] float currentJumpStrength;
+    private CapsuleCollider2D collisionCollider; 
 
     [Header("Sizing Properties")]
     [SerializeField] float bigGrav = 2f;
@@ -33,6 +35,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
 
+    [SerializeField] Transform[] spawnPointPositions;
+    private int currentSpawnPoint = 0; 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,10 +47,12 @@ public class PlayerController : MonoBehaviour
         currentJumpStrength = bigJumpStrength;
         rb.mass = currentWeight;
         rb.gravityScale = bigGrav;
+        collisionCollider = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
     {
+        if (isDying) return; 
         hInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
 
@@ -119,4 +126,39 @@ public class PlayerController : MonoBehaviour
     {
         return isGrounded && Input.GetButtonDown("Jump");
     }
+    public void StartDying()
+    {
+        StartCoroutine(Dying()); 
+    }
+    private IEnumerator Dying()
+    {
+        Debug.Log("DYING");
+        isDying = true;
+        yield return new WaitForSeconds(3f);
+        Respawn();
+        isDying = false; 
+    }
+
+    public void UpdateSpawnPoint(int spawnNum)
+    {
+        currentSpawnPoint = spawnNum;
+    }
+    
+    public int GetCurrentSpawnNum()
+    {
+        return currentSpawnPoint; 
+    }
+
+    public void Respawn()
+    {
+        if (spawnPointPositions.Length > 0 && currentSpawnPoint < spawnPointPositions.Length)
+        {
+            transform.position = spawnPointPositions[currentSpawnPoint].position;
+        }
+        else
+        {
+            Debug.LogWarning("Spawn point not set or invalid index.");
+        }
+    }
+
 }
