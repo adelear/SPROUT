@@ -119,7 +119,7 @@ public class JumpPad : MonoBehaviour
         transform.position = launchPosition;
         isCompressed = false;
         isLaunching = false;
-        yield return new WaitForSeconds(0.05f); // Wait a short duration to ensure the player is launched
+        //yield return new WaitForSeconds(0.05f); // Wait a short duration to ensure the player is launched
         StartCoroutine(ResetSpring()); 
     }
 
