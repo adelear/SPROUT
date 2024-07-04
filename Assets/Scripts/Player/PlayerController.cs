@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [SerializeField] Transform[] spawnPointPositions;
-    private int currentSpawnPoint = 0; 
+    private int currentSpawnPoint = 0;
+    private Animator anim;
+    private SpriteRenderer sr; 
 
     void Start()
     {
@@ -48,12 +50,16 @@ public class PlayerController : MonoBehaviour
         rb.mass = currentWeight;
         rb.gravityScale = bigGrav;
         collisionCollider = GetComponent<CapsuleCollider2D>();
+        anim = GetComponent<Animator>();    
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (isDying) return; 
+        if (isDying) return;
+        anim.SetBool("isBig", isBig);
         hInput = Input.GetAxis("Horizontal");
+        anim.SetFloat("hInput", Mathf.Abs(hInput)); 
         rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -61,6 +67,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(Vector2.up * currentJumpStrength, ForceMode2D.Impulse);
+            anim.SetTrigger("Jump"); 
             Debug.Log("Jumping");
         }
 
@@ -75,7 +82,10 @@ public class PlayerController : MonoBehaviour
         {
             ApplyBuoyancy(10f);
         }
-        if (isWalkingOnWater) ApplyBuoyancy(10f); 
+        if (isWalkingOnWater) ApplyBuoyancy(10f);
+
+        if (hInput != 0)
+            sr.flipX = (hInput > 0); 
     }
 
     public void ApplyBuoyancy(float force)
@@ -118,7 +128,7 @@ public class PlayerController : MonoBehaviour
             rb.gravityScale = lilGrav;
             transform.localScale = new Vector2(0.5f, 0.5f);
         }
-
+        anim.SetBool("isBig", isLarge); 
         rb.mass = currentWeight;
     }
 
