@@ -1,19 +1,18 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI; 
 using UnityEngine.SceneManagement;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string[] lines;
-    public bool[] showImage;
+    public Sprite[] images;
+    public Image imgComponent; 
     public float textSpeed = 0.05f;
     public bool isOutro = false;
     public AudioClip dialogueSound;
-
-    public GameObject image1; 
-    public GameObject image2; 
 
     private int index;
     private Coroutine typingCoroutine;
@@ -34,6 +33,18 @@ public class Dialogue : MonoBehaviour
     {
         textComponent.text = string.Empty; // Clear text before typing
         bool playSound = false; // Flag to determine whether to play sound for the current letter
+
+        // Set the corresponding image for the current line
+        if (index < images.Length)
+        {
+            imgComponent.sprite = images[index];
+            imgComponent.enabled = true; // Enable the image component
+        }
+        else
+        {
+            imgComponent.enabled = false; // Disable the image component if no corresponding image
+        }
+
         foreach (char c in lines[index].ToCharArray())
         {
             if (playSound)
@@ -43,18 +54,6 @@ public class Dialogue : MonoBehaviour
             textComponent.text += c;
             playSound = !playSound; // Toggle the flag
             yield return new WaitForSeconds(textSpeed);
-        }
-
-        // Show image based on boolean variable
-        if (showImage[index])
-        {
-            image1.SetActive(true); 
-            image2.SetActive(false); 
-        }
-        else
-        {
-            image1.SetActive(false); 
-            image2.SetActive(true); 
         }
     }
 
