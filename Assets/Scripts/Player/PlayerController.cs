@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool isDying; 
     [SerializeField] float currentWeight;
     [SerializeField] float currentJumpStrength;
-    private CapsuleCollider2D collisionCollider; 
+    
 
     [Header("Sizing Properties")]
     [SerializeField] float bigGrav = 2f;
@@ -35,8 +36,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
 
+    [Header("Wall Jump Properties")]
+    [SerializeField] float wallJumpForce = 5f;
+    [SerializeField] Transform wallCheck;
+    [SerializeField] float wallCheckDistance = 0.1f;
+    [SerializeField] LayerMask wallLayer;
+    [SerializeField] private bool isOnWall = false;
+    [SerializeField] private bool canWallJump = true;
+    [SerializeField] private GameObject currentWall = null; 
+    //When against a wall when NOT big, gravity gets halved, and their jump gets replenished (they can jump again) 
+    //The jump has a little impulse opposite to the wall they are sliding on 
+    //If they jump off their wall using their replenished jump, and land back on the wall they were on, their jump does not get replenished and they cannot slide on the wall
+    // Must jump onto a new wall when using their replenished jump 
+
+
     [SerializeField] Transform[] spawnPointPositions;
     private int currentSpawnPoint = 0;
+    private CapsuleCollider2D smallCollider;
+    private CircleCollider2D bigCollider;
     private Animator anim;
     private SpriteRenderer sr; 
 
@@ -49,9 +66,12 @@ public class PlayerController : MonoBehaviour
         currentJumpStrength = bigJumpStrength;
         rb.mass = currentWeight;
         rb.gravityScale = bigGrav;
-        collisionCollider = GetComponent<CapsuleCollider2D>();
+        smallCollider = GetComponent<CapsuleCollider2D>();
+        bigCollider = GetComponent<CircleCollider2D>(); 
         anim = GetComponent<Animator>();    
         sr = GetComponent<SpriteRenderer>();
+
+        smallCollider.enabled = false; 
     }
 
     void Update()
@@ -59,16 +79,45 @@ public class PlayerController : MonoBehaviour
         if (isDying) return;
         anim.SetBool("isBig", isBig);
         hInput = Input.GetAxis("Horizontal");
-        anim.SetFloat("hInput", Mathf.Abs(hInput)); 
+        anim.SetFloat("hInput", Mathf.Abs(hInput));
         rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
+        Vector2 wallCheckDirection = sr.flipX ? Vector2.left : Vector2.right;
+        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, wallCheckDirection, wallCheckDistance, wallLayer);
+        isOnWall = hit.collider != null;
+
+        Debug.DrawRay(wallCheck.position, Vector2.right * (sr.flipX ? -1 : 1) * wallCheckDistance, Color.red); 
+
+        if (isGrounded)
+        {
+            canWallJump = true; // Reset wall jump ability when grounded
+            currentWall = null;
+        }
+
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(Vector2.up * currentJumpStrength, ForceMode2D.Impulse);
-            anim.SetTrigger("Jump"); 
+            anim.SetTrigger("Jump");
             Debug.Log("Jumping");
+        }
+        else if (!isGrounded && isOnWall)
+        {
+            if (currentWall != hit.collider.gameObject) // Check if the player is on a different wall
+            {
+                currentWall = hit.collider.gameObject; // Update current wall
+                canWallJump = true; 
+            }
+        }
+        if (Input.GetButtonDown("Jump") && isOnWall && canWallJump && !isGrounded)
+        {
+            //rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
+            Vector2 wallNormal = hit.normal; 
+            rb.AddForce(new Vector2(-wallCheckDirection.x * wallJumpForce * 10, Mathf.Abs(wallCheckDirection.x) * wallJumpForce * Mathf.Sin(0.785f)), ForceMode2D.Impulse);  
+            anim.SetTrigger("Jump");
+            Debug.Log("Wall Jumping");
+            canWallJump = false; // Disable further wall jumps until grounded or on a different wall
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -80,12 +129,12 @@ public class PlayerController : MonoBehaviour
 
         if (!isBig && isInWater)
         {
-            ApplyBuoyancy(10f);
+            ApplyBuoyancy(10f); 
         }
         if (isWalkingOnWater) ApplyBuoyancy(10f);
 
         if (hInput != 0)
-            sr.flipX = (hInput > 0); 
+            sr.flipX = (hInput < 0);
     }
 
     public void ApplyBuoyancy(float force)
@@ -119,16 +168,18 @@ public class PlayerController : MonoBehaviour
             currentWeight = bigWeight;
             currentJumpStrength = bigJumpStrength;
             rb.gravityScale = bigGrav;
-            transform.localScale = Vector2.one;
+            smallCollider.enabled = false;
+            bigCollider.enabled = true;
         }
         else
         {
             currentWeight = lilWeight;
             currentJumpStrength = lilJumpStrength;
             rb.gravityScale = lilGrav;
-            transform.localScale = new Vector2(0.5f, 0.5f);
+            bigCollider.enabled = false;
+            smallCollider.enabled = true;
         }
-        anim.SetBool("isBig", isLarge); 
+        anim.SetBool("isBig", isLarge);
         rb.mass = currentWeight;
     }
 
@@ -138,7 +189,7 @@ public class PlayerController : MonoBehaviour
     }
     public void StartDying()
     {
-        StartCoroutine(Dying()); 
+        StartCoroutine(Dying());
     }
     private IEnumerator Dying()
     {
@@ -146,17 +197,17 @@ public class PlayerController : MonoBehaviour
         isDying = true;
         yield return new WaitForSeconds(3f);
         Respawn();
-        isDying = false; 
+        isDying = false;
     }
 
     public void UpdateSpawnPoint(int spawnNum)
     {
         currentSpawnPoint = spawnNum;
     }
-    
+
     public int GetCurrentSpawnNum()
     {
-        return currentSpawnPoint; 
+        return currentSpawnPoint;
     }
 
     public void Respawn()
@@ -170,5 +221,4 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Spawn point not set or invalid index.");
         }
     }
-
 }
