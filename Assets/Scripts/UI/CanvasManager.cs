@@ -129,7 +129,7 @@ public class CanvasManager : MonoBehaviour
 
     void UpdateScoreText(int value)
     {
-        scoreText.text = "Score: " + value.ToString();
+        scoreText.text = value.ToString();
     }
 
     void Update()
