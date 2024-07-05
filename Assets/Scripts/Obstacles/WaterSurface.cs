@@ -5,6 +5,8 @@ public class WaterSurface : MonoBehaviour
 {
     [SerializeField] float buoyancyForce = 5f;
     private PlayerController playerController;
+    [SerializeField] AudioClip waterIn;
+    [SerializeField] AudioClip waterOut;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,6 +19,7 @@ public class WaterSurface : MonoBehaviour
                 // Apply sinking force
                 playerController.ApplyBuoyancy(-buoyancyForce);
                 playerController.isWalkingOnWater = false;
+                AudioManager.Instance.PlayOneShotWithRandomPitch(waterIn, false, 0.8f, 1.2f); 
             }
             else
             {
@@ -24,6 +27,7 @@ public class WaterSurface : MonoBehaviour
                 playerController.EnableWalkingOnWater();
                 playerController.ApplyBuoyancy(buoyancyForce);
                 playerController.isWalkingOnWater = true;
+                AudioManager.Instance.PlayOneShotWithRandomPitch(waterOut, false, 0.8f, 1.2f);
             }
         }
     }

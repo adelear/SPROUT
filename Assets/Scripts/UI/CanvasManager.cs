@@ -195,7 +195,7 @@ public class CanvasManager : MonoBehaviour
     }
     void StartGame()
     {
-        SceneTransitionManager.Instance.LoadScene("WhiteBoxing"); ;
+        SceneTransitionManager.Instance.LoadScene("Alaska's Scene"); ;
         Time.timeScale = 1.0f;
         if (audioSource != null)
         {

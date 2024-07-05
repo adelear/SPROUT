@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/WhiteBoxing.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: bd33406d3c3458c4aa45d2ba48587abf
   - enabled: 1
+    path: Assets/Scenes/Alaska's Scene.unity
+    guid: 2b5f71d8bcd95cf4aa9e4fa236af0ffc
+  - enabled: 0
+    path: Assets/Scenes/WhiteBoxing.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
     path: Assets/Scenes/GameOver.unity
     guid: f4f60122cc60e8140a407c2c910cedcf
   m_configObjects: {}

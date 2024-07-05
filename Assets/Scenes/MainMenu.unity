@@ -3739,7 +3739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -158, y: -153}
+  m_AnchoredPosition: {x: -158, y: -282}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1163158096
@@ -3762,7 +3762,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "THE \nYIPPEEEE\n"
+  m_text: SPROUT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4232c4e68a5b38140b66c4910766181e, type: 2}
   m_sharedMaterial: {fileID: 8906629609978001665, guid: 4232c4e68a5b38140b66c4910766181e, type: 2}
@@ -7163,8 +7163,8 @@ MonoBehaviour:
   asm: {fileID: 2046171089}
   audioSource: {fileID: 2046171088}
   pauseSound: {fileID: 0}
-  gameMusic: {fileID: 8300000, guid: be8ba02735d01354e8079cadb89c4feb, type: 3}
-  titleMusic: {fileID: 8300000, guid: 1ab6bc77baf4e5b47b8a320d5ab7e4dd, type: 3}
+  gameMusic: {fileID: 0}
+  titleMusic: {fileID: 0}
   buttonSound: {fileID: 8300000, guid: 40caa6eb282c51547afab130b0935b9e, type: 3}
   audioMixer: {fileID: 24100000, guid: 1f5fc492211d46242b5accb5c3e510f2, type: 2}
   startButton: {fileID: 878492362}
@@ -7191,7 +7191,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4711349831396172394, guid: 1f5fc492211d46242b5accb5c3e510f2, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1ab6bc77baf4e5b47b8a320d5ab7e4dd, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
