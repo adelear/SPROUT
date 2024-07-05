@@ -1299,7 +1299,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Environment-Sheet_0
+      name: Concrete_TopLeftCorner
       rect:
         serializedVersion: 2
         x: 512
@@ -1307,7 +1307,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1320,7 +1320,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Environment-Sheet_1
+      name: Concrete_TopSide
       rect:
         serializedVersion: 2
         x: 544
@@ -1328,7 +1328,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1341,7 +1341,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Environment-Sheet_2
+      name: Concrete_TopRightCorner
       rect:
         serializedVersion: 2
         x: 576
@@ -1349,7 +1349,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1362,7 +1362,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Environment-Sheet_3
+      name: Concrete_LeftSide
       rect:
         serializedVersion: 2
         x: 512
@@ -1370,7 +1370,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1383,10 +1383,73 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Environment-Sheet_4
+      name: Concrete_BotLeftCorner
       rect:
         serializedVersion: 2
         x: 512
+        y: 220
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6d70fe3a93502048b169ea15b0fa12a
+      internalID: -1040312522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Concrete_RightSide
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 252
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3d1a18ca3bee2f40a602c00db768dad
+      internalID: 125630267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Concrete_Middl
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 252
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87a03a71384add1419b792eee4f77ee2
+      internalID: 1367607608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Concrete_BottomSide
+      rect:
+        serializedVersion: 2
+        x: 544
         y: 220
         width: 32
         height: 32
@@ -1397,8 +1460,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6d70fe3a93502048b169ea15b0fa12a
-      internalID: -1040312522
+      spriteID: c249df7a86681454c81230ece508f3e5
+      internalID: -2037269642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Concrete_BotRightCorner
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 220
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7373b0c866fae4144aad40aba66eca85
+      internalID: 1655977315
       vertices: []
       indices: 
       edges: []
@@ -1433,17 +1517,21 @@ TextureImporter:
       ConcreteTop_Left: -776024181
       ConcreteTop_Middle: 136537250
       ConcreteTop_Right: -1924788398
+      Concrete_BotLeftCorner: -1040312522
+      Concrete_BotRightCorner: 1655977315
+      Concrete_BottomSide: -2037269642
       Concrete_Left: -567464287
+      Concrete_LeftSide: -226977621
+      Concrete_Middl: 1367607608
       Concrete_Middle: 526018154
       Concrete_Right: -678466361
+      Concrete_RightSide: 125630267
+      Concrete_TopLeftCorner: -231619679
+      Concrete_TopRightCorner: -1168650908
+      Concrete_TopSide: -640882440
       Dirt_Left: -1479161916
       Dirt_Middle: 1211309570
       Dirt_Right: -155066722
-      Environment-Sheet_0: -231619679
-      Environment-Sheet_1: -640882440
-      Environment-Sheet_2: -1168650908
-      Environment-Sheet_3: -226977621
-      Environment-Sheet_4: -1040312522
       Fan1: -146934803
       Fan2: 1559524949
       FanCircle1: 927576526
