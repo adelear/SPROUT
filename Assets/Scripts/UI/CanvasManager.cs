@@ -97,7 +97,7 @@ public class CanvasManager : MonoBehaviour
         if (scoreText) 
         {
             GameManager.Instance.OnScoreValueChanged.AddListener((value) => UpdateScoreText(value));
-            scoreText.text = "Score: " + GameManager.Instance.Score.ToString();
+            scoreText.text = GameManager.Instance.Score.ToString(); 
         }
 
         if (resumeGame)

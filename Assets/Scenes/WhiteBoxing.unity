@@ -15954,18 +15954,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6993806425190830096, guid: aa615896df61b8241b5cce466a2abf25, type: 3}
-      propertyPath: deadSound
-      value: 
-      objectReference: {fileID: 8300000, guid: d15b0a2e721c94b4b81be10739ede9dd, type: 3}
-    - target: {fileID: 6993806425190830096, guid: aa615896df61b8241b5cce466a2abf25, type: 3}
-      propertyPath: jumpSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 008a50f2e4800ef43af0c52c8e56e147, type: 3}
-    - target: {fileID: 6993806425190830096, guid: aa615896df61b8241b5cce466a2abf25, type: 3}
-      propertyPath: ceilingCheckDistance
-      value: 2.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993806425190830096, guid: aa615896df61b8241b5cce466a2abf25, type: 3}
       propertyPath: spawnPointPositions.Array.data[0]
       value: 
       objectReference: {fileID: 2136323845}

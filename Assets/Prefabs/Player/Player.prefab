@@ -180,6 +180,7 @@ MonoBehaviour:
   lilWeight: 1
   bigJumpStrength: 25
   lilJumpStrength: 7.5
+  ceilingCheckDistance: 2.66
   speed: 5
   hInput: 0
   isGrounded: 1
@@ -201,9 +202,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8d1b09ade000f5e44ac2d55622d374e5, type: 3}
   - {fileID: 8300000, guid: 2f25d3c6639842c49a71e546e90ac1d9, type: 3}
   - {fileID: 8300000, guid: 71c349f8f66ee4b4aad4ef3dd0f53530, type: 3}
+  deadSound: {fileID: 8300000, guid: d15b0a2e721c94b4b81be10739ede9dd, type: 3}
+  jumpSound: {fileID: 8300000, guid: 008a50f2e4800ef43af0c52c8e56e147, type: 3}
   spawnPointPositions:
   - {fileID: 0}
   - {fileID: 0}
+  canToggle: 1
 --- !u!95 &85224710606581820
 Animator:
   serializedVersion: 5
