@@ -49,7 +49,7 @@ public class Dialogue : MonoBehaviour
         {
             if (playSound)
             {
-                // AudioManager.Instance.PlayOneShot(dialogueSound, false); // Play dialogue sound for every other letter
+                AudioManager.Instance.PlayOneShot(dialogueSound, false); // Play dialogue sound for every other letter
             }
             textComponent.text += c;
             playSound = !playSound; // Toggle the flag

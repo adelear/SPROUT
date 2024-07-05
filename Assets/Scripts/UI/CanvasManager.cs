@@ -24,6 +24,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Button backButton;
     [SerializeField] Button quitButton;
     [SerializeField] Button returnToMenuButton;
+    [SerializeField] Button backToPauseMenu;
     [SerializeField] Button resumeGame;
 
     [Header("Menus")]
@@ -62,6 +63,13 @@ public class CanvasManager : MonoBehaviour
             backButton.onClick.AddListener(ShowMainMenu);
             EventTrigger backButtonTrigger = backButton.gameObject.AddComponent<EventTrigger>();
             AddPointerEnterEvent(backButtonTrigger, PlayButtonSound);
+        }
+
+        if (backToPauseMenu)
+        {
+            EventTrigger backToPauseMenuTrigger = backToPauseMenu.gameObject.AddComponent<EventTrigger>();
+            AddPointerEnterEvent(backToPauseMenuTrigger, PlayButtonSound);
+            backToPauseMenu.onClick.AddListener(UnpauseGame); 
         }
 
         if (quitButton)
@@ -116,6 +124,7 @@ public class CanvasManager : MonoBehaviour
         Time.timeScale = 1.0f;
         GameManager.Instance.SwitchState(GameManager.GameState.GAME);
         pauseMenu.SetActive(false);
+        if (settingsMenu) settingsMenu.SetActive(false);
     }
 
     void UpdateScoreText(int value)
@@ -130,6 +139,7 @@ public class CanvasManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
+            if (settingsMenu) settingsMenu.SetActive(false); 
 
 
             if (pauseMenu.activeSelf)
@@ -149,7 +159,8 @@ public class CanvasManager : MonoBehaviour
     }
     void ShowSettingsMenu()
     {
-        mainMenu.SetActive(false);
+        if (mainMenu) mainMenu.SetActive(false);
+        if (pauseMenu) pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
         if (masterSlider)
         {
