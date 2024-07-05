@@ -12,6 +12,9 @@ public class JumpPad : MonoBehaviour
     [SerializeField] float resetSpeed = 5f;
     [SerializeField] float launchImpulse = 10f;
 
+    [SerializeField] AudioClip compressSound;
+    [SerializeField] AudioClip launchSound;
+
     private Vector3 originalPosition;
     private Vector3 downPosition;
 
@@ -89,6 +92,7 @@ public class JumpPad : MonoBehaviour
                 {
                     Rigidbody2D rb = playerController.GetComponent<Rigidbody2D>();
                     rb.AddForce(Vector2.up * launchImpulse, ForceMode2D.Impulse);
+                    AudioManager.Instance.PlayOneShot(launchSound, false); 
                 }
             }
         }
@@ -96,7 +100,8 @@ public class JumpPad : MonoBehaviour
 
     IEnumerator CompressSpring()
     {
-        Debug.Log("Compressing"); 
+        Debug.Log("Compressing");
+        AudioManager.Instance.PlayOneShot(compressSound, false); 
         isCompressed = true;
         while (Vector3.Distance(transform.position, downPosition) > 0.01f)
         {
