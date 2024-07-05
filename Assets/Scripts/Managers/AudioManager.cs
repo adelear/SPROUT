@@ -47,4 +47,31 @@ public class AudioManager : MonoBehaviour
         temp.PlayOneShot(clip);
         temp.outputAudioMixerGroup = isMusic ? musicGroup : sfxGroup;
     }
+
+    public void PlayOneShotWithRandomPitch(AudioClip clip, bool isMusic, float minPitch, float maxPitch)
+    {
+        Debug.Log("Playing " + clip.name + " with random pitch");
+
+        foreach (AudioSource source in currentAudioSources)
+        {
+            if (source.isPlaying)
+                continue;
+
+            float randomPitch = Random.Range(minPitch, maxPitch);
+            source.pitch = randomPitch;
+
+            source.PlayOneShot(clip);
+            source.outputAudioMixerGroup = isMusic ? musicGroup : sfxGroup;
+            return;
+        }
+
+        AudioSource temp = gameObject.AddComponent<AudioSource>();
+        currentAudioSources.Add(temp);
+
+        float randomPitchTemp = Random.Range(minPitch, maxPitch);
+        temp.pitch = randomPitchTemp;
+
+        temp.PlayOneShot(clip);
+        temp.outputAudioMixerGroup = isMusic ? musicGroup : sfxGroup;
+    } 
 }
