@@ -63,6 +63,7 @@ public class JumpPad : MonoBehaviour
                 StartCoroutine(ResetSpring());
             }
             */ 
+            //StopCoroutine(LaunchPlayer());
         }
     }
 
@@ -84,7 +85,7 @@ public class JumpPad : MonoBehaviour
             }
         }
 
-        if (isLaunching)
+        if (isLaunching && isPlayerOnPad)
         {
             if (playerController.IsJumping())
             {
