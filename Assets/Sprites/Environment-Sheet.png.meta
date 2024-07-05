@@ -126,9 +126,9 @@ TextureImporter:
       name: Grass_Left
       rect:
         serializedVersion: 2
-        x: 16
+        x: 17
         y: 300
-        width: 32
+        width: 31
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -170,7 +170,7 @@ TextureImporter:
         serializedVersion: 2
         x: 112
         y: 300
-        width: 32
+        width: 31
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -223,27 +223,6 @@ TextureImporter:
       bones: []
       spriteID: f537d7cde8be2864088122b64c68eee4
       internalID: 2134380961
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tree
-      rect:
-        serializedVersion: 2
-        x: 304
-        y: 139
-        width: 189
-        height: 193
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a93ae36e137faa14c97a33201ea74e72
-      internalID: -1120627778
       vertices: []
       indices: 
       edges: []
@@ -731,6 +710,510 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: PlanksLeft
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 300
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 159ca0151ef5d714e988de35c8ca74df
+      internalID: -46350810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FenceMid
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 220
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d53acb7743fc94646958b1313fd6e937
+      internalID: -17026880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spring
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 92
+        width: 64
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07367f1538368d044890c67971b9840a
+      internalID: -1750900256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FanCircle1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 44
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c6bab12124222a4f9d83ae011dd838f
+      internalID: 927576526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FanCircle2
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 44
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 500046aeb9c84b446bf714efbc60ceed
+      internalID: 946724383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlanksMid
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 300
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a062c1e8d1090d04497520e91f4b2a72
+      internalID: 356984362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlanksRight
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 300
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd17c5e3addd8f048b570b81d9cd3b7a
+      internalID: 119896211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamsMid
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 268
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 354c8ea094812ed4b96bd018dcec3e92
+      internalID: -1854433772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamsRight
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 268
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 577fd50f175a57b42880659dc8a6214b
+      internalID: 959427606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamsLeft
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 268
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd2a9f337cbb3504a8025d2fe5d929bb
+      internalID: -397006232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BeamSingle
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 236
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb90ec2bb5a36614ea3f798374405eb6
+      internalID: 1355745612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FenceLeft
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 220
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ed91808f5a57e94ab06ed06fd45a5d7
+      internalID: -1664719609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FenceRight
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 220
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e3bd54029f4e68479c6066dcd5f8e89
+      internalID: 1732789312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FenceTop3
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 252
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d9a4a3b596215a44acae2996fb146a8
+      internalID: 1894682598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FenceTop2
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 252
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 586528a4d7bca5046b31d264b5b7798e
+      internalID: 756995113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FenceTop1
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 252
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 889de40aeaa8f9141b80e8d118acb3bd
+      internalID: -1364664270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike1_Bottom
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 44
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 388ec89215d8563478b5c6db5552a83a
+      internalID: 567956464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike1_Up
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 44
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd939fe80bf5bc1438e1da1f46a0f078
+      internalID: 342114887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike1_Right
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 44
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f191f13fbb6608d4ca69a9005b1f2709
+      internalID: -32329375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike1_Left
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 44
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4d2c9c81dd085a46bdfe9216996abbc
+      internalID: 608712575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike2_Bottom
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 12
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cb72dca1194a424fbd2c738424c5d4a
+      internalID: 541122712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike2_Up
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 12
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5336229ed9f372948b008aace7eacdf4
+      internalID: 1943466058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike2_Right
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 12
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 966ab6a43b202c047927dd08bd9d9996
+      internalID: -1274869442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike2_Left
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 12
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21735b9e2ad4dbf489499aee8cbbca42
+      internalID: 1055520696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -742,6 +1225,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BeamSingle: 1355745612
+      BeamsLeft: -397006232
+      BeamsMid: -1854433772
+      BeamsRight: 959427606
       BrickBottom_Left: -1813228895
       BrickBottom_Middle: -2091256699
       BrickBottom_Right: 868005486
@@ -765,9 +1252,30 @@ TextureImporter:
       Dirt_Right: -155066722
       Fan1: -146934803
       Fan2: 1559524949
+      FanCircle1: 927576526
+      FanCircle2: 946724383
+      FenceLeft: -1664719609
+      FenceMid: -17026880
+      FenceRight: 1732789312
+      FenceTop1: -1364664270
+      FenceTop2: 756995113
+      FenceTop3: 1894682598
       Grass_Left: 1410069522
       Grass_Middle: -332050523
       Grass_Right: 1737408789
+      PlanksLeft: -46350810
+      PlanksMid: 356984362
+      PlanksRight: 119896211
+      Spike1_Bottom: 567956464
+      Spike1_Left: 608712575
+      Spike1_Right: -1882112694
+      Spike1_Up: 342114887
+      Spike2: -675804232
+      Spike2_Bottom: 1049707091
+      Spike2_Left: 1055520696
+      Spike2_Right: -1274869442
+      Spike2_Up: 1943466058
+      Spring: -1750900256
       Tree: -1120627778
       Window1: 1972272899
       Window2: 2134380961
