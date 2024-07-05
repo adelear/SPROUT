@@ -1,16 +1,18 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI; 
 using UnityEngine.SceneManagement;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string[] lines;
+    public Sprite[] images;
+    public Image imgComponent; 
     public float textSpeed = 0.05f;
     public bool isOutro = false;
     public AudioClip dialogueSound;
-
 
     private int index;
     private Coroutine typingCoroutine;
@@ -31,11 +33,23 @@ public class Dialogue : MonoBehaviour
     {
         textComponent.text = string.Empty; // Clear text before typing
         bool playSound = false; // Flag to determine whether to play sound for the current letter
+
+        // Set the corresponding image for the current line
+        if (index < images.Length)
+        {
+            imgComponent.sprite = images[index];
+            imgComponent.enabled = true; // Enable the image component
+        }
+        else
+        {
+            imgComponent.enabled = false; // Disable the image component if no corresponding image
+        }
+
         foreach (char c in lines[index].ToCharArray())
         {
             if (playSound)
             {
-                //AudioManager.Instance.PlayOneShot(dialogueSound, false); // Play dialogue sound for every other letter
+                // AudioManager.Instance.PlayOneShot(dialogueSound, false); // Play dialogue sound for every other letter
             }
             textComponent.text += c;
             playSound = !playSound; // Toggle the flag
@@ -83,15 +97,6 @@ public class Dialogue : MonoBehaviour
             GameManager.Instance.SwitchState(GameManager.GameState.GAME);
         }
     }
-
-    /*
-    IEnumerator LoadNextScene()
-    {
-        yield return new WaitForSeconds(3.0f);
-        SceneManager.LoadScene("GameOver");
-        gameObject.SetActive(false);
-    }
-    */
 
     private void Update()
     {
