@@ -82,7 +82,8 @@ public class PlayerController : MonoBehaviour
         if (!isWallJumping) hInput = Input.GetAxis("Horizontal");
         anim.SetFloat("hInput", Mathf.Abs(hInput));
         if (!isWallJumping) rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
-        
+        if (hInput != 0 || !isWallJumping)
+            sr.flipX = (hInput < 0);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -120,7 +121,8 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(-wallCheckDirection.x * wallJumpForce, Mathf.Abs(wallCheckDirection.x) * (wallJumpForce/1.5f) * Mathf.Sin(0.785f)), ForceMode2D.Impulse);  
             anim.SetTrigger("Jump");
             isWallJumping = true;
-            sr.flipX = !sr.flipX; 
+            //sr.flipX = !sr.flipX; 
+            sr.flipX = wallNormal.x > 0; 
             StartCoroutine(ResetIsWallJumping()); 
             Debug.Log("Wall Jumping");
             canWallJump = false; // Disable further wall jumps until grounded or on a different wall
@@ -140,9 +142,6 @@ public class PlayerController : MonoBehaviour
         if (isWalkingOnWater) ApplyBuoyancy(10f);
 
         if (isWallJumping) rb.velocity = new Vector2(-wallCheckDirection.x * speed, rb.velocity.y); 
-
-        if (hInput != 0 || !isWallJumping)
-            sr.flipX = (hInput < 0);
     }
 
     public void ApplyBuoyancy(float force)
