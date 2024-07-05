@@ -7,10 +7,13 @@ public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string[] lines;
+    public bool[] showImage;
     public float textSpeed = 0.05f;
     public bool isOutro = false;
     public AudioClip dialogueSound;
 
+    public GameObject image1; 
+    public GameObject image2; 
 
     private int index;
     private Coroutine typingCoroutine;
@@ -35,11 +38,23 @@ public class Dialogue : MonoBehaviour
         {
             if (playSound)
             {
-                //AudioManager.Instance.PlayOneShot(dialogueSound, false); // Play dialogue sound for every other letter
+                // AudioManager.Instance.PlayOneShot(dialogueSound, false); // Play dialogue sound for every other letter
             }
             textComponent.text += c;
             playSound = !playSound; // Toggle the flag
             yield return new WaitForSeconds(textSpeed);
+        }
+
+        // Show image based on boolean variable
+        if (showImage[index])
+        {
+            image1.SetActive(true); 
+            image2.SetActive(false); 
+        }
+        else
+        {
+            image1.SetActive(false); 
+            image2.SetActive(true); 
         }
     }
 
@@ -83,15 +98,6 @@ public class Dialogue : MonoBehaviour
             GameManager.Instance.SwitchState(GameManager.GameState.GAME);
         }
     }
-
-    /*
-    IEnumerator LoadNextScene()
-    {
-        yield return new WaitForSeconds(3.0f);
-        SceneManager.LoadScene("GameOver");
-        gameObject.SetActive(false);
-    }
-    */
 
     private void Update()
     {
