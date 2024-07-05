@@ -605,6 +605,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BigDamage1
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 287
+        width: 145
+        height: 133
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c3d52991ec4f1246af1baadf2135768
+      internalID: -1850191445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigDamage2
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 135
+        width: 136
+        height: 133
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a74991a2295b0a44ab882a33c7853562
+      internalID: -2130515282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -616,6 +658,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BigDamage1: -1850191445
+      BigDamage2: -2130515282
       Big_Idle1: -1214704597
       Big_Idle2: -1205220632
       Big_Idle3: 1301871639

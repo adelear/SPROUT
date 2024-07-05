@@ -11172,8 +11172,8 @@ Transform:
   m_GameObject: {fileID: 1324556829}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.36, y: -3.5847, z: 0}
-  m_LocalScale: {x: 17.888306, y: 2.9963973, z: 1}
+  m_LocalPosition: {x: 1.6075, y: -3.5847, z: 0}
+  m_LocalScale: {x: 16.3839, y: 2.9963973, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -15689,12 +15689,16 @@ PrefabInstance:
       value: JumpPad
       objectReference: {fileID: 0}
     - target: {fileID: 2674046429251149931, guid: 671cfbcb5648fcd4ca9382b031b73850, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674046429251149931, guid: 671cfbcb5648fcd4ca9382b031b73850, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.27
+      value: 11.53
       objectReference: {fileID: 0}
     - target: {fileID: 2674046429251149931, guid: 671cfbcb5648fcd4ca9382b031b73850, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.82
+      value: -2.64
       objectReference: {fileID: 0}
     - target: {fileID: 2674046429251149931, guid: 671cfbcb5648fcd4ca9382b031b73850, type: 3}
       propertyPath: m_LocalPosition.z
