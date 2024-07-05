@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -40,8 +41,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform wallCheck;
     [SerializeField] float wallCheckDistance = 0.1f;
     [SerializeField] LayerMask wallLayer;
-    private bool isOnWall = false;
-    private bool canWallJump = true;
+    [SerializeField] private bool isOnWall = false;
+    [SerializeField] private bool canWallJump = true;
+    [SerializeField] private GameObject currentWall = null; 
     //When against a wall when NOT big, gravity gets halved, and their jump gets replenished (they can jump again) 
     //The jump has a little impulse opposite to the wall they are sliding on 
     //If they jump off their wall using their replenished jump, and land back on the wall they were on, their jump does not get replenished and they cannot slide on the wall
@@ -81,13 +83,17 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(hInput * speed, rb.velocity.y);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        isOnWall = Physics2D.Raycast(wallCheck.position, Vector2.right * (sr.flipX ? -1 : 1), wallCheckDistance, wallLayer);
+
+        Vector2 wallCheckDirection = sr.flipX ? Vector2.left : Vector2.right;
+        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, wallCheckDirection, wallCheckDistance, wallLayer);
+        isOnWall = hit.collider != null;
 
         Debug.DrawRay(wallCheck.position, Vector2.right * (sr.flipX ? -1 : 1) * wallCheckDistance, Color.red); 
 
         if (isGrounded)
         {
             canWallJump = true; // Reset wall jump ability when grounded
+            currentWall = null;
         }
 
         if (isGrounded && Input.GetButtonDown("Jump"))
@@ -96,13 +102,22 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Jump");
             Debug.Log("Jumping");
         }
-        else if (!isGrounded && isOnWall && canWallJump && Input.GetButtonDown("Jump"))
+        else if (!isGrounded && isOnWall)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
-            rb.AddForce(new Vector2(-hInput * wallJumpForce, currentJumpStrength), ForceMode2D.Impulse);
-            canWallJump = false; // Disable further wall jumps until grounded or on a different wall
+            if (currentWall != hit.collider.gameObject) // Check if the player is on a different wall
+            {
+                currentWall = hit.collider.gameObject; // Update current wall
+                canWallJump = true; 
+            }
+        }
+        if (Input.GetButtonDown("Jump") && isOnWall && canWallJump && !isGrounded)
+        {
+            //rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
+            Vector2 wallNormal = hit.normal; 
+            rb.AddForce(new Vector2(-wallCheckDirection.x * wallJumpForce * 10, Mathf.Abs(wallCheckDirection.x) * wallJumpForce * Mathf.Sin(0.785f)), ForceMode2D.Impulse);  
             anim.SetTrigger("Jump");
             Debug.Log("Wall Jumping");
+            canWallJump = false; // Disable further wall jumps until grounded or on a different wall
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -114,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isBig && isInWater)
         {
-            ApplyBuoyancy(10f);
+            ApplyBuoyancy(10f); 
         }
         if (isWalkingOnWater) ApplyBuoyancy(10f);
 
