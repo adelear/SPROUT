@@ -20,7 +20,7 @@ public class SceneTransitionManager : MonoBehaviour
         if (Instance != this)
             Destroy(this.gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
