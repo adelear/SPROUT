@@ -44,7 +44,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isOnWall = false;
     [SerializeField] private bool canWallJump = true;
     [SerializeField] private GameObject currentWall = null;
-    private bool isWallJumping; 
+    private bool isWallJumping;
+
+    [Header("Sound Properties")]
+    [SerializeField] AudioClip[] popSounds;
     //When against a wall when NOT big, gravity gets halved, and their jump gets replenished (they can jump again) 
     //The jump has a little impulse opposite to the wall they are sliding on 
     //If they jump off their wall using their replenished jump, and land back on the wall they were on, their jump does not get replenished and they cannot slide on the wall
@@ -132,6 +135,8 @@ public class PlayerController : MonoBehaviour
         {
             isBig = !isBig;
             ToggleBig(isBig);
+            int randomNum = Random.Range(1, 3);
+            AudioManager.Instance.PlayOneShot(popSounds[randomNum], false); 
             Debug.Log("Toggle");
         }
 
