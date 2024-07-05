@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     CapsuleCollider2D capsuleCollider;
 
     [Header("Player Properties")]
@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (isDying) return;
+        if (GameManager.Instance.GetGameState() != GameManager.GameState.GAME) return; 
         anim.SetBool("isBig", isBig);
         if (!isWallJumping) hInput = Input.GetAxis("Horizontal");
         anim.SetFloat("hInput", Mathf.Abs(hInput));

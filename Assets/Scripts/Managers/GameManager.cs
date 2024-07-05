@@ -88,14 +88,14 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        SwitchState(GameState.DEFEAT); 
-        SceneManager.LoadScene("GameOver");
+        SwitchState(GameState.DEFEAT);
+        SceneTransitionManager.Instance.LoadScene("GameOver");
         asm.PlayOneShot(LossSound, false);  
 
         if (SceneManager.GetActiveScene().name == "GameOver")
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneTransitionManager.Instance.LoadScene("MainMenu");
                 Lives = 3;
                 Score = 3;
             }
