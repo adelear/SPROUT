@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Sound Properties")]
     [SerializeField] AudioClip[] popSounds;
+    [SerializeField] AudioClip deadSound;
+    [SerializeField] AudioClip jumpSound; 
     //When against a wall when NOT big, gravity gets halved, and their jump gets replenished (they can jump again) 
     //The jump has a little impulse opposite to the wall they are sliding on 
     //If they jump off their wall using their replenished jump, and land back on the wall they were on, their jump does not get replenished and they cannot slide on the wall
@@ -107,6 +109,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(Vector2.up * currentJumpStrength, ForceMode2D.Impulse);
+            AudioManager.Instance.PlayOneShotWithRandomPitch(jumpSound, false, 0.8f, 1.2f); 
             anim.SetTrigger("Jump");
             Debug.Log("Jumping");
         }
@@ -124,6 +127,7 @@ public class PlayerController : MonoBehaviour
             Vector2 wallNormal = hit.normal; 
             rb.AddForce(new Vector2(-wallCheckDirection.x * wallJumpForce, Mathf.Abs(wallCheckDirection.x) * (wallJumpForce/1.5f) * Mathf.Sin(0.785f)), ForceMode2D.Impulse);  
             anim.SetTrigger("Jump");
+            AudioManager.Instance.PlayOneShotWithRandomPitch(jumpSound, false, 0.8f, 1.2f);
             isWallJumping = true;
             //sr.flipX = !sr.flipX; 
             sr.flipX = wallNormal.x > 0; 
@@ -212,6 +216,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dying()
     {
         Debug.Log("DYING");
+        AudioManager.Instance.PlayOneShot(deadSound, false); 
         isDying = true;
         rb.velocity = Vector2.zero; 
         anim.SetTrigger("Death"); 

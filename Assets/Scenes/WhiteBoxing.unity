@@ -15734,6 +15734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinZone
       objectReference: {fileID: 0}
+    - target: {fileID: 5051814260196835799, guid: 22cf73c4fc87df548b038000c1a3ef4c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15848,6 +15852,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6993806425190830096, guid: aa615896df61b8241b5cce466a2abf25, type: 3}
+      propertyPath: deadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d15b0a2e721c94b4b81be10739ede9dd, type: 3}
+    - target: {fileID: 6993806425190830096, guid: aa615896df61b8241b5cce466a2abf25, type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 008a50f2e4800ef43af0c52c8e56e147, type: 3}
     - target: {fileID: 6993806425190830096, guid: aa615896df61b8241b5cce466a2abf25, type: 3}
       propertyPath: spawnPointPositions.Array.data[0]
       value: 
