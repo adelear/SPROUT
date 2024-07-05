@@ -208,7 +208,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("DYING");
         isDying = true;
-        yield return new WaitForSeconds(3f);
+        rb.velocity = Vector2.zero; 
+        anim.SetTrigger("Death"); 
+        yield return new WaitForSeconds(2f);
         Respawn();
         isDying = false;
     }
