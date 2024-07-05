@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float lilWeight = 10f;
     [SerializeField] float bigJumpStrength = 5f;
     [SerializeField] float lilJumpStrength = 10f;
+    [SerializeField] float ceilingCheckDistance = 2f; 
 
     [Header("Movement Properties")]
     [SerializeField] float speed = 5f;
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
     private CircleCollider2D bigCollider;
     private Animator anim;
     private SpriteRenderer sr; 
+    [SerializeField] private bool canToggle = true; 
 
     void Start()
     {
@@ -97,7 +99,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, wallCheckDirection, wallCheckDistance, wallLayer);
         isOnWall = hit.collider != null;
 
-        Debug.DrawRay(wallCheck.position, Vector2.right * (sr.flipX ? -1 : 1) * wallCheckDistance, Color.red); 
+        Debug.DrawRay(wallCheck.position, Vector2.right * (sr.flipX ? -1 : 1) * wallCheckDistance, Color.red);
 
         if (isGrounded && !isBig)
         {
@@ -136,7 +138,7 @@ public class PlayerController : MonoBehaviour
             canWallJump = false; // Disable further wall jumps until grounded or on a different wall
         }
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T) && canToggle)
         {
             isBig = !isBig;
             ToggleBig(isBig);
@@ -152,6 +154,14 @@ public class PlayerController : MonoBehaviour
         if (isWalkingOnWater) ApplyBuoyancy(10f);
 
         if (isWallJumping) rb.velocity = new Vector2(-wallCheckDirection.x * speed, rb.velocity.y); 
+
+        if (!isBig)
+        {
+            RaycastHit2D hitCeiling = Physics2D.Raycast(transform.position, Vector2.up, ceilingCheckDistance, groundLayer);
+            if (hitCeiling.collider != null) canToggle = false;
+            else canToggle = true;
+            Debug.DrawRay(transform.position, Vector2.up * ceilingCheckDistance, Color.red);
+        }
     }
 
     public void ApplyBuoyancy(float force)
