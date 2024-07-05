@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         if (HealthImg != null)
         {
             RectTransform healthRectTransform = HealthImg.GetComponent<RectTransform>();
-            healthRectTransform.sizeDelta -= new Vector2(10f, 0f); 
+            healthRectTransform.sizeDelta -= new Vector2(494f, 0f); 
         }
     }
 
