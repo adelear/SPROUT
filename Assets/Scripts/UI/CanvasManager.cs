@@ -33,7 +33,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] GameObject settingsMenu;
 
     [Header("Text")]
-    [SerializeField] TMP_Text scoreText; 
+    [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text deathText;
 
     [Header("Sliders")]
     [SerializeField] Slider masterSlider;
@@ -100,6 +101,12 @@ public class CanvasManager : MonoBehaviour
             scoreText.text = GameManager.Instance.Score.ToString(); 
         }
 
+        if (deathText)
+        {
+            GameManager.Instance.OnLifeValueChanged.AddListener((value) => UpdateDeathText(value));
+            deathText.text = GameManager.Instance.Lives.ToString();
+        }
+
         if (resumeGame)
         {
             EventTrigger resumeGameTrigger = resumeGame.gameObject.AddComponent<EventTrigger>();
@@ -130,6 +137,11 @@ public class CanvasManager : MonoBehaviour
     void UpdateScoreText(int value)
     {
         scoreText.text = value.ToString();
+    }
+
+    void UpdateDeathText(int value)
+    {
+        deathText.text = value.ToString();
     }
 
     void Update()

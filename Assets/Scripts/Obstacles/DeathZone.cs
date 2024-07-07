@@ -9,7 +9,7 @@ public class DeathZone : MonoBehaviour
         if (collision.GetComponent<PlayerController>())
         {
             PlayerController playerController = collision.GetComponent<PlayerController>();
-            if (!playerController.isDying) GameManager.Instance.Lives--;
+            if (!playerController.isDying) GameManager.Instance.Lives++;
             playerController.StartDying();  
         }
         
