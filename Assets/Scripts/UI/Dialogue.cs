@@ -98,9 +98,9 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Update() 
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.anyKeyDown)  
         {
             if (textComponent.text == lines[index])
             {

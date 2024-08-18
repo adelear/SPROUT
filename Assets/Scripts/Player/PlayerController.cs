@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
             isWallJumping = false; 
         }
 
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if ((isGrounded && Input.GetButtonDown("Jump")) || isGrounded && Input.GetKeyDown(KeyCode.LeftControl)) 
         {
             rb.AddForce(Vector2.up * currentJumpStrength, ForceMode2D.Impulse);
             AudioManager.Instance.PlayOneShotWithRandomPitch(jumpSound, false, 0.8f, 1.2f); 
@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
             //rb.gravityScale = lilGrav;
             //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         }
-        if (Input.GetButtonDown("Jump") && isOnWall && canWallJump && !isBig)
+        if ((Input.GetButtonDown("Jump") && isOnWall && canWallJump && !isBig) || (Input.GetKeyDown(KeyCode.LeftControl) && isOnWall && canWallJump && !isBig)) 
         {
             //rb.velocity = new Vector2(rb.velocity.x, 0); // Reset vertical velocity
             Vector2 wallNormal = hit.normal; 
@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             canWallJump = false; // Disable further wall jumps until grounded or on a different wall
         }
 
-        if (Input.GetKeyDown(KeyCode.T) && canToggle)
+        if ((Input.GetKeyDown(KeyCode.T) && canToggle) || (Input.GetKeyDown(KeyCode.LeftAlt) && canToggle))
         {
             isBig = !isBig;
             ToggleBig(isBig);
@@ -232,12 +232,12 @@ public class PlayerController : MonoBehaviour
     }
     public bool IsJumping()
     {
-        return isGrounded && Input.GetButtonDown("Jump");
+        return isGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.LeftControl)); 
     }
     public void StartDying()
     {
         StartCoroutine(Dying());
-    }
+    } 
     private IEnumerator Dying()
     {
         Debug.Log("DYING");

@@ -127,18 +127,26 @@ public class CanvasManager : MonoBehaviour
                 menuButtons[currentButtonIndex].onClick.Invoke();
             }
         }
-        /*
-        if (settingsMenu.activeSelf)
-        {
-            SelectButton(backButton);
-            if (Input.GetKeyDown(KeyCode.Space)) backButton.onClick.Invoke();
-        }
-        */ 
-        
 
         if (!pauseMenu) return;
+        if (pauseMenu.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                NavigateButtons(-1);
+            }
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                NavigateButtons(1);
+            }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                menuButtons[currentButtonIndex].onClick.Invoke();
+            }
+        } 
+
+        if (Input.GetKeyDown(KeyCode.Return)) 
         {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
             if (settingsMenu) settingsMenu.SetActive(false); 
