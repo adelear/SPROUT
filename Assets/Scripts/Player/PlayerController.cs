@@ -120,8 +120,22 @@ public class PlayerController : MonoBehaviour
             if (currentWall != hit.collider.gameObject) // Check if the player is on a different wall
             {
                 currentWall = hit.collider.gameObject; // Update current wall
-                canWallJump = true; 
+                canWallJump = true;
+                Vector2 wallNormal = hit.normal;
+                //sr.flipX = wallNormal.x < 0;
+                StopAllCoroutines();
+
+                //rb.velocity = new Vector2(rb.velocity.x, 0f);
+                //lilGrav = 0.5f;
+                //rb.gravityScale = lilGrav;
+
             }
+        }
+        else
+        {
+            //lilGrav = 1f;
+            //rb.gravityScale = lilGrav;
+            //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         }
         if (Input.GetButtonDown("Jump") && isOnWall && canWallJump && !isBig)
         {
@@ -131,8 +145,8 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Jump");
             AudioManager.Instance.PlayOneShotWithRandomPitch(jumpSound, false, 0.8f, 1.2f);
             isWallJumping = true;
-            //sr.flipX = !sr.flipX; 
-            sr.flipX = wallNormal.x > 0; 
+            //sr.flipX = !sr.flipX;  
+            //sr.flipX = wallNormal.x < 0; 
             StartCoroutine(ResetIsWallJumping()); 
             Debug.Log("Wall Jumping");
             canWallJump = false; // Disable further wall jumps until grounded or on a different wall
@@ -158,7 +172,8 @@ public class PlayerController : MonoBehaviour
         if (!isBig)
         {
             RaycastHit2D hitCeiling = Physics2D.Raycast(transform.position, Vector2.up, ceilingCheckDistance, groundLayer);
-            if (hitCeiling.collider != null) canToggle = false;
+            RaycastHit2D hitGround = Physics2D.Raycast(transform.position, Vector2.down, ceilingCheckDistance, groundLayer);
+            if (hitCeiling.collider != null && hitGround.collider !=null) canToggle = false;
             else canToggle = true;
             Debug.DrawRay(transform.position, Vector2.up * ceilingCheckDistance, Color.red);
         }
@@ -212,7 +227,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ResetIsWallJumping()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         isWallJumping = false; 
     }
     public bool IsJumping()

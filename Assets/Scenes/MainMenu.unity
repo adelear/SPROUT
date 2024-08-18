@@ -6283,7 +6283,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: -751.5
+  m_Spacing: -840.2
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -6858,6 +6858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Options
       objectReference: {fileID: 0}
+    - target: {fileID: 2278499488515272908, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5186595642484187261, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
       propertyPath: m_text
       value: Options
@@ -6876,7 +6880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7373101348275816197, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7373101348275816197, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
       propertyPath: m_AnchorMin.x
@@ -6884,7 +6888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7373101348275816197, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7373101348275816197, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6924,11 +6928,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7373101348275816197, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7373101348275816197, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -129.5
       objectReference: {fileID: 0}
     - target: {fileID: 7373101348275816197, guid: a941e9a993f3a4745a1420e71b5ff72d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7178,9 +7182,14 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   settingsMenu: {fileID: 377423059}
   scoreText: {fileID: 0}
+  deathText: {fileID: 0}
   masterSlider: {fileID: 784743181}
   musicSlider: {fileID: 400262205}
   sfxSlider: {fileID: 722196686}
+  menuButtons:
+  - {fileID: 878492362}
+  - {fileID: 1754563688}
+  currentButtonIndex: 0
 --- !u!82 &2046171088
 AudioSource:
   m_ObjectHideFlags: 0

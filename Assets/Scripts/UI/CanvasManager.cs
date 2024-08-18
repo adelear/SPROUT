@@ -41,44 +41,12 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
 
+    [SerializeField] private Button[] menuButtons; 
+    [SerializeField] int currentButtonIndex = 0; 
+
     void Start()
     {
         asm = GetComponent<AudioManager>();
-        if (startButton)
-        {
-            startButton.onClick.AddListener(StartGame);
-            EventTrigger startButtonTrigger = startButton.gameObject.AddComponent<EventTrigger>();
-            AddPointerEnterEvent(startButtonTrigger, PlayButtonSound); 
-        }
-
-        if (settingsButton)
-        {
-            EventTrigger settingsButtonTrigger = settingsButton.gameObject.AddComponent<EventTrigger>();
-            AddPointerEnterEvent(settingsButtonTrigger, PlayButtonSound);
-            settingsButton.onClick.AddListener(ShowSettingsMenu);
-        }
-
-
-        if (backButton)
-        {
-            backButton.onClick.AddListener(ShowMainMenu);
-            EventTrigger backButtonTrigger = backButton.gameObject.AddComponent<EventTrigger>();
-            AddPointerEnterEvent(backButtonTrigger, PlayButtonSound);
-        }
-
-        if (backToPauseMenu)
-        {
-            EventTrigger backToPauseMenuTrigger = backToPauseMenu.gameObject.AddComponent<EventTrigger>();
-            AddPointerEnterEvent(backToPauseMenuTrigger, PlayButtonSound);
-            backToPauseMenu.onClick.AddListener(UnpauseGame); 
-        }
-
-        if (quitButton)
-        {
-            quitButton.onClick.AddListener(Quit);
-            EventTrigger quitButtonTrigger = quitButton.gameObject.AddComponent<EventTrigger>();
-            AddPointerEnterEvent(quitButtonTrigger, PlayButtonSound); 
-        }
 
         if (masterSlider)
         {
@@ -95,30 +63,27 @@ public class CanvasManager : MonoBehaviour
             sfxSlider.onValueChanged.AddListener((value) => OnSliderValueChanged(value, "SFXVol")); 
         }
 
-        if (scoreText) 
+        if (menuButtons.Length > 0)
         {
-            GameManager.Instance.OnScoreValueChanged.AddListener((value) => UpdateScoreText(value));
-            scoreText.text = GameManager.Instance.Score.ToString(); 
+            SelectButton(menuButtons[currentButtonIndex]);
         }
 
-        if (deathText)
-        {
-            GameManager.Instance.OnLifeValueChanged.AddListener((value) => UpdateDeathText(value));
-            deathText.text = GameManager.Instance.Lives.ToString();
-        }
+        InitializeButton(startButton, StartGame);
+        InitializeButton(settingsButton, ShowSettingsMenu);
+        InitializeButton(backButton, ShowMainMenu);
+        InitializeButton(backToPauseMenu, UnpauseGame);
+        InitializeButton(quitButton, Quit);
+        InitializeButton(resumeGame, UnpauseGame);
+        InitializeButton(returnToMenuButton, LoadTitle);
+    }
 
-        if (resumeGame)
+    void InitializeButton(Button button, UnityEngine.Events.UnityAction action)
+    {
+        if (button != null)
         {
-            EventTrigger resumeGameTrigger = resumeGame.gameObject.AddComponent<EventTrigger>();
-            AddPointerEnterEvent(resumeGameTrigger, PlayButtonSound); 
-            resumeGame.onClick.AddListener(UnpauseGame);
-        }
-
-        if (returnToMenuButton)
-        {
-            EventTrigger returnToMenuTrigger = returnToMenuButton.gameObject.AddComponent<EventTrigger>();
-            AddPointerEnterEvent(returnToMenuTrigger, PlayButtonSound);
-            returnToMenuButton.onClick.AddListener(LoadTitle);
+            button.onClick.AddListener(action);
+            EventTrigger buttonTrigger = button.gameObject.AddComponent<EventTrigger>();
+            AddPointerEnterEvent(buttonTrigger, PlayButtonSound);
         }
     }
 
@@ -146,6 +111,31 @@ public class CanvasManager : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                NavigateButtons(-1);
+            }
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                NavigateButtons(1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                menuButtons[currentButtonIndex].onClick.Invoke();
+            }
+        }
+        /*
+        if (settingsMenu.activeSelf)
+        {
+            SelectButton(backButton);
+            if (Input.GetKeyDown(KeyCode.Space)) backButton.onClick.Invoke();
+        }
+        */ 
+        
+
         if (!pauseMenu) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -169,12 +159,35 @@ public class CanvasManager : MonoBehaviour
 
         }
     }
+
+    void NavigateButtons(int direction)
+    {
+        DeselectButton(menuButtons[currentButtonIndex]);
+        currentButtonIndex = (currentButtonIndex + direction + menuButtons.Length) % menuButtons.Length;
+        SelectButton(menuButtons[currentButtonIndex]);
+    }
+
+
+    void SelectButton(Button button)
+    {
+        EventSystem.current.SetSelectedGameObject(button.gameObject);
+        var colors = button.colors;
+        button.image.color = colors.highlightedColor;
+    }
+
+    void DeselectButton(Button button)
+    {
+        menuButtons[currentButtonIndex].OnDeselect(null); 
+        var colors = button.colors;
+        button.image.color = colors.normalColor;
+    }
+
     void ShowSettingsMenu()
     {
         if (mainMenu) mainMenu.SetActive(false);
         if (pauseMenu) pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
-        if (masterSlider)
+        if (masterSlider) 
         {
             float value;
             audioMixer.GetFloat("MasterVol", out value);
@@ -239,7 +252,7 @@ public class CanvasManager : MonoBehaviour
         asm.PlayOneShot(buttonSound, false);
     }
 
-    void Quit()
+    void Quit() 
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
