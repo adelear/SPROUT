@@ -75,6 +75,8 @@ public class CanvasManager : MonoBehaviour
         InitializeButton(quitButton, Quit);
         InitializeButton(resumeGame, UnpauseGame);
         InitializeButton(returnToMenuButton, LoadTitle);
+
+        //Add listener to update death and score for arcade machine update
     }
 
     void InitializeButton(Button button, UnityEngine.Events.UnityAction action)
