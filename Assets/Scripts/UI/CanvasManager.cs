@@ -43,6 +43,9 @@ public class CanvasManager : MonoBehaviour
 
     void Start()
     {
+        GameManager.Instance.OnScoreValueChanged.AddListener(UpdateScoreText);
+        GameManager.Instance.OnLifeValueChanged.AddListener(UpdateDeathText);
+
         asm = GetComponent<AudioManager>();
         if (startButton)
         {
